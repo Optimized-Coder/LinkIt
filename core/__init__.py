@@ -14,4 +14,13 @@ def create_app():
     db.init_app(app)
     migrate = Migrate(app, db)
 
+    from .models import User
+
+    # Blueprints
+    from .routes import main_bp
+    app.register_blueprint(main_bp, url_prefix='/')
+
+    app.app_context().push()
+
     return app
+
